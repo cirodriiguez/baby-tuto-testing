@@ -1,7 +1,6 @@
 package base;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -29,23 +28,19 @@ public class Base {
         driver.get(url);
     }
 
-    public void explicitWait(By id, int sec){
+    public void explicitWait(WebElement element, int sec){
         WebDriverWait wait = new WebDriverWait(driver, sec);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(id));
+        wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public void click(By id){
-        driver.findElement(id).click();
+    public void click(WebElement element){
+        element.click();
     }
 
-    public void actionMoveToElement(By id){
+    public void actionMoveToElement(WebElement element){
         Actions builder = new Actions(driver);
-        Actions seriesOfActions = builder.moveToElement(driver.findElement(id));
+        Actions seriesOfActions = builder.moveToElement(element);
         seriesOfActions.perform();
-    }
-
-    public List<WebElement> findElements(By id) {
-        return driver.findElements(id);
     }
 
     public String getText(WebElement element) {
